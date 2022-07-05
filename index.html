@@ -6,11 +6,33 @@
 	<meta name="robots" content="all">
 
 	<title>Kaimakan71's Blog</title>
-	<link rel="icon" type="image/png" sizes="64x64" href="icon.png">
+	<link rel="icon" type="image/png" sizes="128x128" href="icon.png">
 	<link rel="stylesheet" href="style.min.css">
 </head>
 <body>
 	<header><img src="icon.png">Kaimakan71's Blog</header>
+	<article>
+		<h1>Creating your own operating system</h1>
+		<h2>Part I: Introduction</h2>
+		<h6>7/4/22 @ 8:30 PM CST</h6>
+		Why make your own operating system? There are plenty of good ones out there already. You probably want your own OS because you think you can make something better than already exists (you can). It's not easy to make an operating system, but you've chosen to do it and I have some experience/code. So, we'll start our journey where the computer starts. You can find this code on my Github repo <a href="https://github.com/Kaimakan71/FOSOS">Kaimakan71/FOSOS</a>. But first, we need a buildsystem.
+		<h2>Part II: The Buildsystem/Prerequisites</h2>
+		The buildsystem is a tool that helps control the way your code is compiled and makes it easier to build. I use make, as it's widely supported and comes preinstalled with MacOS and most Linux distros (Get it <a href="https://www.gnu.org/software/make/">here</a>). When you run `make` it looks for a file named `Makefile`. I won't teach you make here, because the goal of this tutorial is to teach you how to make an operating system, not use Make. If you want to learn, there's a tutorial <a href="https://makefiletutorial.com/">here</a> that seems to go over the core principles you'll need. You should also get a GCC cross-compiler (see <a href="https://wiki.osdev.org/GCC_Cross-Compiler">GCC cross-compiler</a>) that can produce 32-bit ELF executables, <a href="https://nasm.us/">NASM</a>. Another tool we'll need is <a href="https://www.qemu.org/">QEMU</a>, an emulator to run your OS on. This is much easier because real hardware takes a while to start up and costs money to repair if it gets damaged. So, let's start our makefile:
+<pre><code>#### /Makefile ####
+# The 'all' target gets run when no other target is specified
+<name>all</name>: <value>disk.img</value>
+
+# Build our bootloader
+<name>disk.img</name>: <value>boot.asm</value>
+	<directive>@</directive><sh>nasm boot.asm -f bin -o disk.img</sh>
+
+# Run QEMU with our disk image
+<name>run</name>:
+	<directive>@</directive><sh>qemu-system-i386 -drive format=raw,file=disk.img,if=floppy -m 1M -name NameMe!</sh>
+</code></pre>
+		Now that you have a buildsystem ready, it's time to make some OS code!
+		<h2>Part III: Coming soon...</h2>
+	</article>
 	<article>
 		<h1>Hello, World!</h1>
 		<h6>6/6/22 @ 8 AM CST</h6>
